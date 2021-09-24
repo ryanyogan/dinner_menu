@@ -20,4 +20,6 @@ config :dinner_menu, Services.Airtable,
   base_id: "appraYJwSlFScdVg5",
   api_url: "https://api.airtable.com/v0/"
 
+config :dinner_menu, DinnerMenu.Repo, adapter: DinnerMenu.Repo.Http
+
 import_config "#{Mix.env()}.exs"
