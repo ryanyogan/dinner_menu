@@ -19,6 +19,8 @@ defmodule DinnerMenu.Repo.Http.Decoder do
       name: Map.get(fields, "Name", ""),
       date: Date.from_iso8601!(Map.get(fields, "Date")),
       menu_items: Map.get(fields, "Menu Items", []),
+      inventory_items: Map.get(fields, "inventory_items", []),
+      members: Map.get(fields, "members", []),
       attendees: Map.get(fields, "Attendees", []),
       pickle_approved: pickle_approved
     }

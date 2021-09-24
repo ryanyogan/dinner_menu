@@ -7,7 +7,9 @@ defmodule DinnerMenu.Meal do
           name: String.t(),
           date: Date.t(),
           menu_items: [Item.t()],
+          inventory_items: [String.t()],
           attendees: [Member.t()],
+          members: [String.t()],
           pickle_approved: boolean()
         }
 
@@ -16,6 +18,8 @@ defmodule DinnerMenu.Meal do
     :name,
     :date,
     :menu_items,
+    :inventory_items,
+    :members,
     :attendees,
     :pickle_approved
   ]
