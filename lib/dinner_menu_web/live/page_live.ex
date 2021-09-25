@@ -51,6 +51,8 @@ defmodule DinnerMenuWeb.PageLive do
     end
   end
 
+  def display_day(date), do: date.day
+
   def day_of_week(date) do
     mapping = %{
       1 => "M",
@@ -65,4 +67,6 @@ defmodule DinnerMenuWeb.PageLive do
     day = Date.day_of_week(date)
     mapping[day] || ""
   end
+
+  def is_today?(%Date{} = date), do: Date.utc_today().day == date.day
 end
