@@ -2,6 +2,7 @@ defmodule DinnerMenu.Meal.Cache do
   alias DinnerMenu.{Repo, Repo.Cache}
 
   @behaviour Cache
+  @topic "meals"
 
   def child_spec(opts) do
     %{
@@ -23,4 +24,7 @@ defmodule DinnerMenu.Meal.Cache do
 
   @impl Cache
   def fetch_fn, do: fn -> Repo.meals(true) end
+
+  @impl Cache
+  def topic, do: @topic
 end

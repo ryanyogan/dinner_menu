@@ -6,6 +6,9 @@ defmodule DinnerMenu.Repo.Cache do
   @callback table_name :: atom()
   @callback start_link(keyword()) :: GenServer.on_start()
   @callback fetch_fn :: fun()
+  @callback topic :: String.t()
+
+  @secret "cache-secret"
 
   def all(cache) do
     cache
@@ -50,14 +53,19 @@ defmodule DinnerMenu.Repo.Cache do
     {:ok, pid} = Synchronizer.start_link(cache: name)
     ref = Process.monitor(pid)
 
-    {:ok, %{name: name, synchronizer_ref: ref}}
+    {:ok, %{name: name, synchronizer_ref: ref, hash: ""}}
   end
 
   @impl GenServer
-  def handle_cast({:set_all, items}, %{name: name} = state) when is_list(items) do
-    Enum.each(items, &:ets.insert(table_for(name), {&1.id, &1}))
+  def handle_cast({:set_all, items}, %{name: name, hash: hash} = state) when is_list(items) do
+    new_hash = generate_hash(items)
 
-    {:noreply, state}
+    if hash != new_hash do
+      Enum.each(items, &:ets.insert(table_for(name), {&1.id, &1}))
+      DinnerMenuWeb.Endpoint.broadcast(apply(name, :topic, []), "update", %{})
+    end
+
+    {:noreply, %{state | hash: new_hash}}
   end
 
   @impl GenServer
@@ -85,4 +93,10 @@ defmodule DinnerMenu.Repo.Cache do
   end
 
   defp table_for(name), do: apply(name, :table_name, [])
+
+  defp generate_hash(items) do
+    :hmac
+    |> :crypto.mac(:sha256, @secret, :erlang.term_to_binary(items))
+    |> Base.encode64()
+  end
 end

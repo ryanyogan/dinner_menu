@@ -3,9 +3,18 @@ defmodule DinnerMenuWeb.PageLive do
 
   alias DinnerMenuWeb.LiveEncoder
 
+  @topic "meals"
+
   @impl true
   def mount(_params, _session, socket) do
+    DinnerMenuWeb.Endpoint.subscribe(@topic)
+
     {:ok, socket |> assign_socket()}
+  end
+
+  @impl true
+  def handle_info(%{event: "update"}, socket) do
+    {:noreply, assign_socket(socket)}
   end
 
   def get_items(menu_items) do
