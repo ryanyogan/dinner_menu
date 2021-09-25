@@ -2,7 +2,7 @@
   <div class="grid gap-6 lg:grid-cols-2">
     <!-- card -->
     <%= for meal <- @meals do %>
-    <div class="flex items-center rounded bg-white <%= if is_today?(meal.date), do: "border-indigo-800 border-2", else: "" %> shadow-xl overflow-hidden">
+    <div class="flex items-center rounded bg-white <%= if is_today?(meal.date), do: "border-green-600 border-2", else: "border-indigo-800 border-2" %> shadow-xl overflow-hidden">
       <div class="justify-center flex w-14 ml-4">
         <h1 class="ml-3 text-5xl font-bold tracking-wide text-indigo-600">
           <%= day_of_week(meal.date) %>
@@ -13,7 +13,7 @@
       </div>
 
       <div class="px-6 py-4">
-        <h3 class="text-xl tracking-wider font-bold text-gray-900">
+        <h3 class="text-xl tracking-wide font-bold text-gray-800">
           <%= meal.name %>
         </h3>
 
