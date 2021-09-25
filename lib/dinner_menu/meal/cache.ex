@@ -1,5 +1,5 @@
 defmodule DinnerMenu.Meal.Cache do
-  alias DinnerMenu.Repo.Cache
+  alias DinnerMenu.{Repo, Repo.Cache}
 
   @behaviour Cache
 
@@ -20,4 +20,7 @@ defmodule DinnerMenu.Meal.Cache do
   def start_link(_args) do
     GenServer.start_link(Cache, __MODULE__, name: __MODULE__)
   end
+
+  @impl Cache
+  def fetch_fn, do: fn -> Repo.meals(true) end
 end
