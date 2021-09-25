@@ -10,7 +10,7 @@ defmodule DinnerMenu.Meal do
           inventory_items: [String.t()],
           attendees: [Member.t()],
           members: [String.t()],
-          pickle_approved: boolean()
+          kids: String.t()
         }
 
   defstruct [
@@ -21,6 +21,6 @@ defmodule DinnerMenu.Meal do
     :inventory_items,
     :members,
     :attendees,
-    :pickle_approved
+    :kids
   ]
 end

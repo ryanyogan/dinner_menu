@@ -36,7 +36,6 @@ defmodule DinnerMenu.Repo.Http do
     case Airtable.get(table, id) do
       {:ok, response} ->
         IO.inspect(response)
-
         {:ok, Decoder.decode(response)}
 
       {:error, 404} ->

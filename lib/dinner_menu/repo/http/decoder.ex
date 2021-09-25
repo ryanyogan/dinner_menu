@@ -11,7 +11,7 @@ defmodule DinnerMenu.Repo.Http.Decoder do
         "id" => id,
         "fields" =>
           %{
-            "Pickle Approved" => pickle_approved
+            "Kids" => kids
           } = fields
       }) do
     %Meal{
@@ -22,7 +22,7 @@ defmodule DinnerMenu.Repo.Http.Decoder do
       inventory_items: Map.get(fields, "inventory_items", []),
       members: Map.get(fields, "members", []),
       attendees: Map.get(fields, "Attendees", []),
-      pickle_approved: pickle_approved
+      kids: kids
     }
   end
 

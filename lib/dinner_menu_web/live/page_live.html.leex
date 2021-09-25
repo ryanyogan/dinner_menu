@@ -1,25 +1,26 @@
-  <div class="px-8 max-w-lg mx-auto">
-    <h1 class="mt-6 text-center tracking-wider text-4xl font-semibold text-gray-800">Dinner<span class="text-indigo-600">Menu</span></h1>
-  </div>
-
 <div class="max-w-md sm:max-w-lg lg:max-w-4xl mx-auto">
-  <div class="mt-6 grid gap-6 lg:grid-cols-2">
+  <div class="mt-6 grid gap-2 lg:grid-cols-2">
     <!-- card -->
     <%= for meal <- @meals do %>
     <div class="flex items-center rounded-lg bg-white shadow-lg overflow-hidden">
-      <div class="px-6 py-4">
+      <div class="justify-center flex w-14 ml-4">
         <h1 class="text-4xl font-bold tracking-tight text-indigo-600">
           <%= day_of_week(meal.date) %>
         </h1>
       </div>
       <div class="px-6 py-4">
-        <h3 class="text-lg tracking-tight font-semibold text-gray-800">
+        <h3 class="text-lg tracking-tight font-semibold text-gray-900">
           <%= meal.name %>
         </h3>
-
-        <p class="text-gray-500 truncate uppercase text-sm">
+        <p class="text-gray-800 text-sm capitalize italic">
           <%= Enum.join(meal.inventory_items,", ") %>
         </p>
+
+        <div class="mt-4">
+           <p class="<%= if meal.kids == "Eating at home", do: "text-indigo-600", else: "text-yellow-600 line-through" %> font-bold text-sm">
+            Kids: <%= meal.kids %>
+          </p>
+        </div>
       </div>
     </div>
     <% end %>
