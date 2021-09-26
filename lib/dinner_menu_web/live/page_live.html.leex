@@ -1,8 +1,8 @@
-<div class="mt-4 mb-4 max-w-md sm:max-w-lg lg:max-w-4xl mx-auto">
-  <div class="grid gap-4 lg:grid-cols-2">
+<div class="mt-2 mb-2 max-w-md sm:max-w-lg lg:max-w-4xl mx-auto">
+  <div class="grid gap-2 lg:grid-cols-2">
     <!-- card -->
     <%= for meal <- @meals do %>
-    <div class="flex items-center shadow-lg overflow-hidden <%= if is_today?(meal.date), do: "bg-green-50", else: "bg-white" %>">
+    <div class="ml-1 mr-1 flex items-center rounded-lg overflow-hidden <%= if is_today?(meal.date), do: "bg-green-50", else: "bg-white" %>">
       <div class="justify-center flex w-14 ml-4">
         <h1 class="ml-3 text-5xl font-bold tracking-wide <%= if is_today?(meal.date), do: "text-green-600", else: "text-indigo-600" %>">
           <%= day_of_week(meal.date) %>
